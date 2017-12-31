@@ -1,0 +1,109 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" ng-app="app" class="ng-scope"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    <meta charset="utf-8" />
+    <title>SmaQ</title>
+    <link rel="stylesheet" href="styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles/toastr.min.css" />
+    <link rel="stylesheet" href="styles/app.css" />
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top" ng-click="showDetails = ! showDetails">
+        <div ng-show="!showDetails" class="">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#/"><img src="img/SmaQ_logo.png" width="80" /></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#/" class="ng-binding"> selenium</a></li>
+            <li><!-- ngIf: globals.currentUser.username --><a ng-if="globals.currentUser.username" href="#/logout" class="ng-scope" style="">Logout</a><!-- end ngIf: globals.currentUser.username --></li>
+          </ul>
+        </div>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+
+    
+    <!-- ngView:  --><div ng-view="" class="ng-scope" style=""><div class="container player ng-scope">
+    <h2>Regist Content</h2>
+    <div ng-show="ct.error" class="alert alert-danger ng-binding ng-hide"></div>
+    <form name="form" role="form" class="ng-dirty ng-valid-parse ng-valid-pattern ng-valid-min-size ng-valid-max-total-size ng-valid-validate-fn ng-valid-max-height ng-valid-min-height ng-valid-max-width ng-valid-min-width ng-valid-ratio ng-valid-max-duration ng-valid-min-duration ng-valid-validate-async-fn ng-valid ng-valid-required" style="">
+        <p>このページでは、新規コンテンツ登録を行います。</p>
+        <div>
+            <label for="contentname">コンテンツ名</label>
+            <input type="text" name="contentname" ng-model="ct.contentname" size="100%" required="" class="ng-untouched ng-dirty ng-valid-parse ng-valid ng-valid-required" style="" />
+            <p>コンテンツ名を入力してください。</p>
+
+        </div>
+        <div>
+
+            <label>タイトル画像</label>
+            <input type="file" ngf-select="" ng-model="ct.picFile" name="file" accept="image/*" ngf-max-size="2MB" required="" class="ng-untouched ng-dirty ng-valid-pattern ng-valid-min-size ng-valid-max-total-size ng-valid-validate-fn ng-valid-max-height ng-valid-min-height ng-valid-max-width ng-valid-min-width ng-valid-ratio ng-valid-max-duration ng-valid-min-duration ng-valid-validate-async-fn ng-valid-parse ng-valid ng-valid-required" style="" />
+            <i ng-show="form.file.$error.maxSize" class="ng-binding ng-hide">ファイルが大きすぎます。
+                0.1MB: max 2M</i>
+                <img ng-show="form.file.$valid" ngf-thumbnail="ct.picFile" class="thumb" src="blob:http://p.smaq.party/a2abfdd9-8d20-4dc2-bc14-a00b58f13eb4" style="" />
+                <p>タイトルに表示する画像を指定してください。</p>
+            </div>
+            <div>
+                <button class="btn btn-primary" ng-disabled="!form.$valid || ct.dataLoading" ng-click="ct.uploadPic(ct.picFile)">登録</button>
+                <p><a href="#/" class="btn btn-primary">マイページへ戻る</a>
+<img ng-show="ct.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" class="ng-hide" />
+              <span ng-show="ct.result" class="ng-hide">登録に成功しました。</span>
+              <span class="err ng-binding ng-hide" ng-show="errorMsg"></span>
+          </p></div>
+      </form>
+
+
+  </div></div>
+
+
+    <div class="credits text-center">
+        <p>
+            
+        </p>
+    </div>
+
+    <script src="vendor/jquery-2.1.4.min.js"></script>
+    <script src="vendor/bootstrap.min.js"></script>
+    <script src="vendor/toastr.min.js"></script>
+    <!--　<script src="vendor/jquery.scrollbox.min.js"></script>　-->
+    <script src="vendor/angular.min.js"></script>
+    <script src="vendor/angular-animate.min.js"></script>
+    <script src="vendor/angular-route.min.js"></script>
+    <script src="vendor/angular-cookies.min.js"></script>
+    <!-- // <script src="vendor/angular-fullscreen.js"></script> -->
+    <!-- <script src="vendor/ui-bootstrap-tpls-0.13.4.min.js"></script> -->
+    <script src="vendor/ng-file-upload.min.js"></script>
+    <script src="vendor/ng-file-upload-shim.js"></script>
+
+
+
+    <!-- <script src="scripts/directives/autoscroll.directive.js"></script> -->
+<!--     <script src="scripts/directives/fileModel.directive.js"></script>
+    <script src="scripts/directives/fileDropZone.directive.js"></script> -->
+
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/services/authentication.service.js"></script>
+    <script src="scripts/services/flash.service.js"></script>
+    <script src="scripts/services/user.service.js"></script>
+    <script src="scripts/services/content.service.js"></script>
+
+
+    <script src="scripts/controllers/mypage.controller.js"></script>
+    <script src="scripts/controllers/login.controller.js"></script>
+    <script src="scripts/controllers/logout.controller.js"></script>
+    <script src="scripts/controllers/register.controller.js"></script>
+    <script src="scripts/controllers/cont_register.controller.js"></script>
+    <script src="scripts/controllers/ques_register.controller.js"></script>
+    <script src="scripts/controllers/ques_editor.controller.js"></script>
+    <script src="scripts/controllers/intro.controller.js"></script>
+    <script src="scripts/controllers/player.controller.js"></script>
+    <script src="scripts/controllers/allrank.controller.js"></script>
+
+
+
+</body></html>
